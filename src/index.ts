@@ -1,6 +1,7 @@
 import express from "express"
 import connectMongoDb from "./config/mongo"
 import bookRouter from "./routes/bookRouter"
+import { sendError } from "./utils/response"
 
 process.loadEnvFile()
 
@@ -12,7 +13,7 @@ app.use(express.json())
 app.use("/books", bookRouter)
 
 app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Ruta no encontrada", data: null })
+  sendError(res, 404, "Ruta no encontrada")
 })
 
 app.listen(PORT, () => {

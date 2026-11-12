@@ -30,7 +30,7 @@ const getBook = async (req: Request, res: Response) => {
 
 const addBook = async (req: Request, res: Response) => {
   try {
-    const { title, author, publishedYear, genre, available } = req.body
+    const { title, author, publishedYear, genre, available } = req.body || {}
     const newBook = await Book.create({ title, author, publishedYear, genre, available })
     sendSuccess(res, 201, "Libro creado", newBook)
   } catch (error: any) {
