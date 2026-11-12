@@ -4,27 +4,20 @@ API REST para manejar una coleccion de libros. Hecha con Node.js, Express, TypeS
 
 ## Instalacion
 
-1. Clonar el repo
-
-```
-git clone https://github.com/<usuario>/biblioteca-api.git
-cd biblioteca-api
-```
-
-2. Instalar las dependencias
+1. Instalar las dependencias
 
 ```
 npm install
 ```
 
-3. Crear un archivo `.env` en la raiz (hay un `.env.example` de ejemplo)
+2. Crear un archivo `.env` en la raiz con:
 
 ```
 PORT=3000
 URI_DB=mongodb://127.0.0.1:27017/biblioteca
 ```
 
-4. Correr el proyecto
+3. Correr el proyecto
 
 ```
 npm run dev
