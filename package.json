@@ -1,0 +1,14 @@
+{
+  "name": "biblioteca-api",
+  "version": "1.0.0",
+  "description": "API de biblioteca con Express, TypeScript y MongoDB",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "Ramon",
+  "license": "ISC"
+}
