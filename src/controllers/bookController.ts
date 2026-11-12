@@ -44,4 +44,26 @@ const addBook = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllBooks, getBook, addBook }
+const updateBook = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string
+    if (!isValidObjectId(id)) {
+      return sendError(res, 400, "ID invalido")
+    }
+    const updatedBook = await Book.findByIdAndUpdate(id, req.body, { returnDocument: "after", runValidators: true })
+    if (!updatedBook) {
+      return sendError(res, 404, "Libro no encontrado")
+    }
+    sendSuccess(res, 200, "Libro actualizado", updatedBook)
+  } catch (error: any) {
+    if (error.code === 11000) {
+      return sendError(res, 409, "Ya existe un libro con ese titulo")
+    }
+    if (error.name === "ValidationError" || error.name === "CastError") {
+      return sendError(res, 400, "Datos invalidos")
+    }
+    sendError(res, 500, "Error al actualizar el libro")
+  }
+}
+
+export { getAllBooks, getBook, addBook, updateBook }
