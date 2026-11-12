@@ -28,4 +28,20 @@ const getBook = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllBooks, getBook }
+const addBook = async (req: Request, res: Response) => {
+  try {
+    const { title, author, publishedYear, genre, available } = req.body
+    const newBook = await Book.create({ title, author, publishedYear, genre, available })
+    sendSuccess(res, 201, "Libro creado", newBook)
+  } catch (error: any) {
+    if (error.code === 11000) {
+      return sendError(res, 409, "Ya existe un libro con ese titulo")
+    }
+    if (error.name === "ValidationError") {
+      return sendError(res, 400, "Faltan datos obligatorios o son invalidos")
+    }
+    sendError(res, 500, "Error al crear el libro")
+  }
+}
+
+export { getAllBooks, getBook, addBook }
